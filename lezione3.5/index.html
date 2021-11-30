@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body onkeydown="handleKey(event)">
+    <h1>JS</h1>
+    <input id="output" readonly>
+    <table>
+        <tr>
+            <td onclick="add(7)">7</td>
+            <td onclick="add(8)">8</td>
+            <td onclick="add(9)">9</td>
+            <td id="plus" onclick="pickOperator('+', this)">&plus;</td>
+        </tr>
+        <tr>
+            <td onclick="add(4)">4</td>
+            <td onclick="add(5)">5</td>
+            <td onclick="add(6)">6</td>
+            <td id="minus" onclick="pickOperator('-', this)">&minus;</td>
+        </tr>
+        <tr>
+            <td onclick="add(1)">1</td>
+            <td onclick="add(2)">2</td>
+            <td onclick="add(3)">3</td>
+            <td id="times" onclick="pickOperator('*', this)">&times;</td>
+        </tr>
+        <tr>
+            <td onclick="add(0)">0</td>
+            <td id="divide" onclick="pickOperator('/', this)">&divide;</td>
+            <td onclick="calc()" colspan="2">&equals;</td>
+        </tr>
+    </table>
+    <script src="./main.js"></script>
+    <script src="./keys.js"></script>
+</body>
+</html>
