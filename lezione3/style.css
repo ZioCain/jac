@@ -40,11 +40,12 @@ p.conclusione:not(.non-evidenziato){
     background-color:#0f0;
 }
 
-
 .bg-image{
     position:relative;
 }
-
+.ciao{
+    color:#0f0;
+}
 .bg-image>img{
     position:absolute;
     top:0;
