@@ -7,7 +7,8 @@ function fetchDati(){
     .then(json=>{
         dati = json;
         CaricaDati();
-    });
+    })
+    .catch(err=>alert(err));
 }
 fetchDati();
 
@@ -111,4 +112,5 @@ function OnSalvaNuovo(){
     };
     dati.push(persona);
     CaricaDati();
+    Annulla();
 }
