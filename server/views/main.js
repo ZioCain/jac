@@ -1,15 +1,15 @@
-let dati = [
-    {
-        n: "1",
-        nome: "Mario",
-        cognome: "Rossi"
-    },
-    {
-        n: "2",
-        nome: "Ajeje",
-        cognome: "Brazorv"
-    }
-];
+// contenitore globale dei dati degli studenti
+let dati = [];
+
+function fetchDati(){
+    fetch('/studenti')
+    .then(res=>res.json())
+    .then(json=>{
+        dati = json;
+        CaricaDati();
+    });
+}
+fetchDati();
 
 const container = document.querySelector("tbody");
 
@@ -23,6 +23,7 @@ function CaricaDati(){
     for(var k=0; k<dati.length; ++k){
         const tr = document.createElement("tr");
         for(var prop in dati[k]){
+            if(prop === 'nascita') continue;
             const td = document.createElement("td");
             td.innerHTML = dati[k][prop];
             // aggiunta stile / classi / ...
@@ -47,8 +48,6 @@ function CaricaDati(){
     }
 }
 
-CaricaDati();
-
 function OnNuovo(){
     document.querySelector("#modal-nuovo").style.display = "flex";
     document.querySelector(".overlay").style.display = "block"; // mostra overlay
@@ -58,7 +57,7 @@ function OnModifica(event){
     // prima colonna
     const id = row.querySelector("td").innerHTML;
     idModifica = id;
-    const persona = dati.find(x => x.n == id);
+    const persona = dati.find(x => x.username == id);
     if(persona==null) return;
 
     const modal = document.querySelector("#modal-modifica");
@@ -73,7 +72,7 @@ function OnElimina(event){
     // rimuovo la riga dall'HTML
     container.removeChild(row);
     // rimuovo elemento in base all'ID
-    dati = dati.filter(x => x.n != id);
+    dati = dati.filter(x => x.username != id);
 }
 // chiude la modale
 function Annulla(){
@@ -94,7 +93,7 @@ function OnSalva(){
         cognome: modal.querySelector("[name='cognome']").value
     };
     dati = dati.map(
-        x => x.n == idModifica ? persona : x
+        x => x.username == idModifica ? persona : x
     );
 
     CaricaDati();

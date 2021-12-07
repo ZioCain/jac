@@ -19,8 +19,10 @@ app.use("/studenti", studentiRouter);
 
 //funzione per differire i vari endpoint
 app.get("/", function (req, res){
-    res.sendFile(__dirname + 'views/index.html');
+    res.sendFile(__dirname+'/views/index.html');
 });
+app.get('/style.css', function(req,res){ res.sendFile(__dirname+'/views/style.css') });
+app.get('/main.js', function(req,res){ res.sendFile(__dirname+'/views/main.js') });
 
 //per inizializare il server
 app.listen(process.env.PORT, process.env.HOST, function(){
