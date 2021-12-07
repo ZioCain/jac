@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FETCH</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button onclick="OnNuovo()">Aggiungi persona</button>
+    <table>
+        <thead>
+            <tr>
+                <th>N</th>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+
+    <div class="overlay" onclick="ChiediChiudiOverlay()"></div>
+    <div class="modal" id="modal-modifica">
+        <h3>Modifica persona</h3>
+        <input type="text" name="nome">
+        <input type="text" name="cognome">
+        <div>
+            <button onclick="Annulla()">ANNULLA</button>
+            <button onclick="OnSalva()">SALVA</button>
+        </div>
+    </div>
+    <div class="modal" id="modal-nuovo">
+        <h3>Aggiungi nuova persona</h3>
+        <input type="text" name="nome">
+        <input type="text" name="cognome">
+        <div>
+            <button onclick="Annulla()">ANNULLA</button>
+            <button onclick="OnSalvaNuovo()">SALVA</button>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
