@@ -75,7 +75,7 @@ module.exports = {
                     }
 
                     studentiModel.writeStudenti(studenti, ()=>{
-                        if (studenti[i] !== req.body.username){
+                        if (studenti[i].username !== req.body.username){
                             res.send("Studente Aggiornato (username: " + req.body.username + " già in uso): username = " + studenti[i].username + " nome = " + studenti[i].nome + " cognome = " + studenti[i].cognome + " luogo = " + studenti[i].nascita.luogo + " data = " + studenti[i].nascita.datadinascita);
                         }else{
                             res.send("Studente Aggiornato: username = " + studenti[i].username + " nome = " + studenti[i].nome + " cognome = " + studenti[i].cognome + " luogo = " + studenti[i].nascita.luogo + " data = " + studenti[i].nascita.datadinascita);

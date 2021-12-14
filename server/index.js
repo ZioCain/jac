@@ -17,10 +17,8 @@ app.use("/", function(req, res,  next){
 //Middleware. Tutte le richiesti /studenti/ andranno al router degli studenti
 app.use("/studenti", studentiRouter);
 
-//funzione per differire i vari endpoint
-app.get("/", function (req, res){
-    res.sendFile(__dirname+'/views/index.html');
-});
+//funzione per differire i vari endpoint / gestione files/views
+app.get("/", function (req, res){ res.sendFile(__dirname+'/views/index.html'); });
 app.get('/style.css', function(req,res){ res.sendFile(__dirname+'/views/style.css') });
 app.get('/main.js', function(req,res){ res.sendFile(__dirname+'/views/main.js') });
 

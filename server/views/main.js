@@ -16,6 +16,18 @@ const container = document.querySelector("tbody");
 
 let idModifica = null;
 
+function appendColumn(container, data){
+    const td = document.createElement("td");
+    td.innerHTML = data;
+    // aggiunta stile / classi / ...
+    container.appendChild(td);
+}
+
+function InterpretDate(dateString){
+    let parts = dateString.split('/');
+    return new Date(+parts[0], parts[1]+1, +parts[2]);
+}
+
 function CaricaDati(){
     // svuota tabella
     // container.innerHTML="";
@@ -24,20 +36,26 @@ function CaricaDati(){
     for(var k=0; k<dati.length; ++k){
         const tr = document.createElement("tr");
         for(var prop in dati[k]){
-            if(prop === 'nascita') continue;
-            const td = document.createElement("td");
-            td.innerHTML = dati[k][prop];
-            // aggiunta stile / classi / ...
-            tr.appendChild(td);
+            let item = dati[k][prop];
+            if(prop === 'nascita'){
+                // appende colonna con data in formato francese (con 0 iniziali)
+                appendColumn(tr, new Date(item.datadinascita).toLocaleDateString('fr-FR'));
+                // appende colonna con luogo di nascita
+                appendColumn(tr, item.luogo);
+            }else
+                appendColumn(tr, item);
         }
         const azioni = document.createElement("td");
+        azioni.classList.add("btn-group")
         
         const modifica = document.createElement("button");
         modifica.innerHTML="MODIFICA";
+        modifica.classList.add("btn","btn-info");
         modifica.addEventListener('click', OnModifica);
 
         const elimina = document.createElement("button");
         elimina.innerHTML="ELIMINA";
+        elimina.classList.add("btn","btn-danger");
         elimina.addEventListener('click', OnElimina);
         
         azioni.appendChild(modifica);
@@ -74,6 +92,10 @@ function OnElimina(event){
     container.removeChild(row);
     // rimuovo elemento in base all'ID
     dati = dati.filter(x => x.username != id);
+
+    fetch('/studenti/deletestudente/'+id, {
+        method: 'DELETE'
+    })
 }
 // chiude la modale
 function Annulla(){
@@ -89,13 +111,23 @@ function ChiediChiudiOverlay(){
 function OnSalva(){
     const modal = document.querySelector("#modal-modifica");
     const persona = {
-        n: idModifica,
+        username: idModifica,
         nome: modal.querySelector("[name='nome']").value,
-        cognome: modal.querySelector("[name='cognome']").value
+        cognome: modal.querySelector("[name='cognome']").value,
+        data: modal.querySelector("[name='data']").value,
+        luogo: modal.querySelector("[name='luogo']").value,
     };
     dati = dati.map(
         x => x.username == idModifica ? persona : x
     );
+
+    fetch('/studenti/updatestudente/'+idModifica, {
+        method: 'PUT',
+        body: ObjectToURL(persona),
+        headers:{
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
 
     CaricaDati();
     idModifica = null;
@@ -106,11 +138,39 @@ function OnSalva(){
 function OnSalvaNuovo(){
     const modal = document.querySelector("#modal-nuovo");
     const persona = {
-        n: parseInt(Math.random()*100)+dati.length,
+        username: parseInt(Math.random()*100)+dati.length,
         nome: modal.querySelector("[name='nome']").value,
-        cognome: modal.querySelector("[name='cognome']").value
+        cognome: modal.querySelector("[name='cognome']").value,
+        data: modal.querySelector("[name='data']").value,
+        luogo: modal.querySelector("[name='luogo']").value,
     };
     dati.push(persona);
+
+    fetch('/studenti/addstudente', {
+        method: 'POST',
+        body: ObjectToURL(persona),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+    .then(async res=>{
+        if(res.status == 200)
+            return res.text()
+        else{
+            error = await res.text()
+            throw Error(error);
+        }
+    })
+    .catch(err=>alert(err));
+
     CaricaDati();
     Annulla();
+}
+
+function ObjectToURL(object){
+    let parts = [];
+    for(var part in object){
+        parts.push(part+'='+object[part]);
+    }
+    return parts.join('&');
 }

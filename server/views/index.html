@@ -5,16 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FETCH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button onclick="OnNuovo()">Aggiungi persona</button>
-    <table>
+    <button class="btn btn-primary float-right" onclick="OnNuovo()">Aggiungi persona</button>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>username</th>
+                <th>Username</th>
                 <th>Nome</th>
                 <th>Cognome</th>
+                <th>Data di nascita</th>
+                <th>Luogo di nascita</th>
                 <th>Azioni</th>
             </tr>
         </thead>
@@ -28,6 +31,8 @@
         <h3>Modifica persona</h3>
         <input type="text" name="nome">
         <input type="text" name="cognome">
+        <input type="date" name="data">
+        <input type="text" name="luogo">
         <div>
             <button onclick="Annulla()">ANNULLA</button>
             <button onclick="OnSalva()">SALVA</button>
@@ -37,6 +42,8 @@
         <h3>Aggiungi nuova persona</h3>
         <input type="text" name="nome">
         <input type="text" name="cognome">
+        <input type="date" name="data">
+        <input type="text" name="luogo">
         <div>
             <button onclick="Annulla()">ANNULLA</button>
             <button onclick="OnSalvaNuovo()">SALVA</button>
