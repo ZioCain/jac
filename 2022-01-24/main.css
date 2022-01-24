@@ -1,0 +1,12 @@
+table{width:100%; border: 1px solid #000}
+th,td{border:1px solid #000; letter-spacing: 2px;}
+img{
+    width:50vh;
+    border: 5px solid #f00;
+    border-top: 5px solid #0f0;
+    border-radius: 50%;
+}
+.bg{
+    background: rgb(2,0,36);
+    background: linear-gradient(130deg, rgba(2,0,36,1) 0%, rgba(111,121,9,1) 19%, rgba(13,141,8,1) 36%, rgba(153,7,71,1) 43%, rgba(176,168,5,1) 56%, rgba(4,194,48,1) 66%, rgba(0,212,255,1) 100%);
+}

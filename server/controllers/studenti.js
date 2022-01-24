@@ -9,7 +9,7 @@ module.exports = {
         });
     },
 
-    //Andiamo a usare req.bosy essendo i parametri nel body e non nel query
+    //Andiamo a usare req.body essendo i parametri nel body e non nel query
     addStudente: function (req, res) {
         if (req.body.username && req.body.nome && req.body.cognome && req.body.luogo && req.body.data){
         
