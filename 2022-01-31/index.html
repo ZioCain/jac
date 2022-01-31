@@ -7,15 +7,36 @@
     <title>Prove JS</title>
 </head>
 <body>
-    <div></div>
+    <div>
+        <form id="form" onsubmit="OnSubmit(event)">
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" name="nome" placeholder="Nome" maxlength="30">
+            <br>
+            <input type="email" name="email">
+            <input type="number" min="0" max="100" step="5" name="number">
+            <input type="password">
+            <br>
+            <input type="radio" name="gender" value="M">M<br>
+            <input type="radio" name="gender" value="F">F <br>
+
+            <input type="checkbox" name="privacy"> Accetto privacy policy
+
+            <br>
+            <button type="submit">invia</button>
+        </form>
+    </div>
 
     <script>
-        var variabile = "Dati:";
-        var dato = prompt("Inserisci la tua età");
-        if(dato>=18)
-            alert("maggiorenne");
-        else
-            alert("minorenne");
+        var form = document.getElementById('form');
+        console.log(form.nome.value);
+        
+        function OnSubmit(e){
+            if(form.nome.value == "" || form.nome.value == null){
+                e.preventDefault();
+                return;
+            }
+            alert("tutto ok");
+        }
     </script>
 </body>
 </html>

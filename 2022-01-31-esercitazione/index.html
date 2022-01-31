@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice</title>
+    <style>
+        body{background-color: #000;} 
+    </style>
+</head>
+<body>
+    <form id="form" onsubmit="event.preventDefault()">
+        <input type="number" name="op1" placeholder="Primo operando">
+        <input type="number" name="op2" placeholder="Secondo operando">
+        <button onclick="Add()">+</button>
+        <button onclick="Diff()">-</button>
+        <button onclick="Multiply()">*</button>
+        <button onclick="Divide()">/</button>
+    </form>
+    <script>
+        var form = document.getElementById('form');
+        function Add(){alert(+form.op1.value+ +form.op2.value)}
+        function Diff(){alert(+form.op1.value- +form.op2.value)}
+        function Multiply(){alert(+form.op1.value* +form.op2.value)}
+        function Divide(){alert(+form.op1.value/ +form.op2.value)}
+    </script>
+</body>
+</html>
