@@ -21,6 +21,11 @@ function AggiungiAzioni(tr, elem){
 	td.appendChild(btn);
 
 	btn.onclick = function(){Elimina(elem)};
+
+	var btnEdit = document.createElement("button");
+	btnEdit.innerText = "Modifica";
+	td.appendChild(btnEdit);
+	btnEdit.onclick = function(){Modifica(elem)};
 }
 
 function AggiungiARiga(tr, elem){
@@ -49,6 +54,24 @@ function Inserisci(){
 		InserisciInDB(frase)
 		.then((elem)=>{
 			AggiungiATabella(elem);
+		});
+	}
+}
+
+// funzione per la modifica di una frase
+function Modifica(elem){
+	var frase = prompt("Modifica la frase", elem.frase);
+	if(frase){
+		AggiornaInDB(frase, elem.id)
+		.then((elem)=>{
+			// aggiorna riga in HTML
+			// prendo la riga di riferimento
+			var row = document.getElementById(elem.id);
+			// modifico la seconda cella, che contiene la frase stessa
+			row.children[1].innerText = elem.frase;
+		})
+		.catch(()=>{
+			alert("Impossibile aggiornare la frase");
 		});
 	}
 }

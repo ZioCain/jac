@@ -40,3 +40,23 @@ function InserisciInDB(frase){
 		}
 	)
 }
+
+function AggiornaInDB(frase, id){
+	return new Promise(
+		(resolve, reject)=>{
+			// cerco indice dell'elemento da modificare
+			const indice = dati.findIndex((x)=>x.id == id);
+			// se non lo trovo reject / stop
+			if(indice === -1){
+				reject();
+				return;
+			}
+			// modifico i dati
+			dati[indice].frase = frase;
+			// salvo su LS
+			SalvaLS();
+			// ritorno il dato modificato
+			resolve(dati[indice]);
+		}
+	);
+}
