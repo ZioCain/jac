@@ -1,15 +1,15 @@
 const corpo = document.getElementById("corpo-tabella");
 
 function Elimina(elem){
-	// cerco l'indice dell'elemento
-	const indice = dati.findIndex((x)=>x.id == elem.id);
-	// se non trovo l'elemento, termino l'esecuzione
-	if(indice === -1) return;
-	// rimuovo elemento dall'array
-	dati.splice(indice, 1);
-
-	// rimuovo elemento dall'HTML
-	document.getElementById(elem.id).remove();
+	if(confirm("Vuoi davvero eliminare la frase?"))
+		EliminaDaDB(elem)
+		.then(()=>{
+			// rimuovo elemento dall'HTML
+			document.getElementById(elem.id).remove();
+		})
+		.catch(()=>{
+			alert("Impossibile eliminare la frase");
+		});
 }
 
 function AggiungiAzioni(tr, elem){
@@ -41,3 +41,14 @@ function AggiungiATabella(elem){
 }
 
 dati.forEach( AggiungiATabella );
+
+// inserimento
+function Inserisci(){
+	var frase = prompt("Inserisci nuova frase");
+	if(frase){
+		InserisciInDB(frase)
+		.then((elem)=>{
+			AggiungiATabella(elem);
+		});
+	}
+}
